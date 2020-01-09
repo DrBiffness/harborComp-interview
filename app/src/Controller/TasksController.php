@@ -1,7 +1,7 @@
 <?php
 
-$status = ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'];
 namespace App\Controller;
+$status = ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'];
 
 class TasksController extends AppController
 {

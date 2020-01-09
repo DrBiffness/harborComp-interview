@@ -1,4 +1,5 @@
 <h1>Tasks</h1>
+    <p><?= $this->Html->link('Add Task', ['action' => 'add']) ?></p>
     <table>
         <tr>
             <th>Task Name</th>
