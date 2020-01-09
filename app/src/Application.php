@@ -83,39 +83,39 @@ class Application extends BaseApplication
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this));
 
-            // ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
+            ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
 
         return $middlewareQueue;
     }
 
-    // protected function configAuth(): \Authentication\AuthenticationService
-    // {
-    //     $authenticationService = new \Authentication\AuthenticationService([
-    //         'unauthenticatedRedirect' => '/users/login',
-    //         'queryParam' => 'redirect',
-    //     ]);
+    protected function configAuth(): \Authentication\AuthenticationService
+    {
+        $authenticationService = new \Authentication\AuthenticationService([
+            'unauthenticatedRedirect' => '/users/login',
+            'queryParam' => 'redirect',
+        ]);
 
-    //     // Load identifiers, ensure we check email and password fields
-    //     $authenticationService->loadIdentifier('Authentication.Password', [
-    //         'fields' => [
-    //             'username' => 'username',
-    //             'password' => 'password',
-    //         ]
-    //     ]);
+        // Load identifiers, ensure we check email and password fields
+        $authenticationService->loadIdentifier('Authentication.Password', [
+            'fields' => [
+                'username' => 'username',
+                'password' => 'password',
+            ]
+        ]);
 
-    //     // Load the authenticators, you want session first
-    //     $authenticationService->loadAuthenticator('Authentication.Session');
-    //     // Configure form data check to pick email and password
-    //     $authenticationService->loadAuthenticator('Authentication.Form', [
-    //         'fields' => [
-    //             'username' => 'username',
-    //             'password' => 'password',
-    //         ],
-    //         'loginUrl' => '/users/login',
-    //     ]);
+        // Load the authenticators, you want session first
+        $authenticationService->loadAuthenticator('Authentication.Session');
+        // Configure form data check to pick email and password
+        $authenticationService->loadAuthenticator('Authentication.Form', [
+            'fields' => [
+                'username' => 'username',
+                'password' => 'password',
+            ],
+            'loginUrl' => '/users/login',
+        ]);
 
-    //     return $authenticationService;
-    // }
+        return $authenticationService;
+    }
 
     /**
      * Bootrapping for CLI application.
