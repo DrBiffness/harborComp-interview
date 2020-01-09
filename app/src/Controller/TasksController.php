@@ -27,7 +27,7 @@ class TasksController extends AppController
 
             // Hardcoding the user_id is temporary, and will be removed later
             // when we build authentication out.
-            $task->user_id = $this->request->getAttribute('authentication');
+            // $task->user_id = $this->request->getAttribute('authentication');
 
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('Your task has been saved.'));
