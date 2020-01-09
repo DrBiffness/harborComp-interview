@@ -24,7 +24,12 @@
             </td>
             <td>
                 <?= $this->Html->link('Edit', ['action' => 'edit', $task->id]) ?> | 
-                <?= $this->Html->link('Delete', ['action' => 'delete', $task->id]) ?>
+                <?= $this->Form->postLink(
+                    'Delete',
+                    ['action' => 'delete', $task->id],
+                    ['confirm' => 'Are you sure?']
+                )
+                ?>
             </td>
         </tr>
         <?php endforeach; ?>

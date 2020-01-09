@@ -43,8 +43,14 @@ class TasksController extends AppController
         $this->set('status', ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed']);
     }
 
-    public function delete()
+    public function delete($id)
     {
+        $this->request->allowMethod(['post', 'delete']);
 
+        $task = $this->Tasks->findById($id)->firstOrFail();
+        if ($this->Tasks->delete($task)) {
+            $this->Flash->success(__('The {0} task has been deleted.', $task->task_name));
+            return $this->redirect(['action' => 'index']);
+        }  
     }
 }
