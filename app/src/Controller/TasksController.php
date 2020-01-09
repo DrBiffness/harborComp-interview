@@ -26,7 +26,7 @@ class TasksController extends AppController
 
         if ($this->request->is(['post', 'put'])) {
             $this->Tasks->patchEntity($task, $this->request->getData());
-            if ($this->Task->save($task)) {
+            if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('The task has been updated.'));
                 return $this->redirect(['action' => 'index']);
             }
