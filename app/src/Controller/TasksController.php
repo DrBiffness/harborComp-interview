@@ -17,7 +17,13 @@ class TasksController extends AppController
             ->findById($id)
             ->firstOrFail();
 
-        // $users = $this->loadModel('User');
+        $users = $this->loadModel('User');
+        $userOptions = $users->map(function ($value, $key) {
+            return [
+                'value' => $value->id,
+                'text' => $value->username
+            ]
+        });
 
         if ($this->request->is(['post', 'put'])) {
             $this->Tasks->patchEntity($task, $this->request->getData());
@@ -28,8 +34,7 @@ class TasksController extends AppController
             $this->Flash->error(__('Unable to update this task.'));
         }
         $this->set('task', $task);
-        $this->set('users', ['user1', 'user2']);
-        $this->set('values', ['value1', 'value2']);
+        $this->set('userOptions', $userOptions)
     }
 
     public function delete()
