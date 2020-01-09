@@ -27,7 +27,7 @@ class TasksController extends AppController
 
             // Hardcoding the user_id is temporary, and will be removed later
             // when we build authentication out.
-            $task->user_id = 1;
+            $task->user_id = $this->request->getAttribute('authentication');
 
             if ($this->Tasks->save($task)) {
                 $this->Flash->success(__('Your task has been saved.'));
@@ -36,6 +36,15 @@ class TasksController extends AppController
             $this->Flash->error(__('Unable to add your task.'));
         }
         $this->set('task', $task);
+        
+        $this->loadModel('Users');
+        $users = $this->Users->find();
+        $usersArr = array();
+        foreach ($users as $user) {
+            $usersArr[$user->id] = $user->username; 
+        }
+        $this->set('users', $usersArr);
+
         $this->set('status', ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed']);
     }
 
@@ -44,13 +53,6 @@ class TasksController extends AppController
         $task = $this->Tasks
             ->findById($id)
             ->firstOrFail();
-
-        // $userOptions = $users->map(function ($value, $key) {
-        //     return [
-        //         'value' => $value->id,
-        //         'text' => $value->username
-        //     ];
-        // });
 
         if ($this->request->is(['post', 'put'])) {
             $this->Tasks->patchEntity($task, $this->request->getData());
