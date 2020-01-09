@@ -40,7 +40,7 @@ class TasksController extends AppController
             $usersArr[$user->id] = $user->username; 
         }
         $this->set('users', $usersArr);
-        $this->set('status', ['Not Started', 'In Progress', 'Completed']);
+        $this->set('status', ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed']);
     }
 
     public function delete()
