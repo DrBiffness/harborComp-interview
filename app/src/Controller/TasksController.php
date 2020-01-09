@@ -35,7 +35,11 @@ class TasksController extends AppController
         $this->set('task', $task);
         $this->loadModel('Users');
         $users = $this->Users->find();
-        $this->set(compact('users'));
+        $usersArr = array();
+        foreach ($users as $user) {
+            $usersArr[$user->id] = $user->username; 
+        }
+        $this->set('users', $usersArr);
     }
 
     public function delete()
