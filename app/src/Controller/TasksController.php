@@ -34,7 +34,7 @@ class TasksController extends AppController
             $this->Flash->error(__('Unable to update this task.'));
         }
         $this->set('task', $task);
-        $this->set('userOptions', $userOptions)
+        $this->set('userOptions', $userOptions);
     }
 
     public function delete()
