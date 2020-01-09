@@ -5,6 +5,7 @@
             <th>Description</th>
             <th>Status</th>
             <th>Assigned User</th>
+            <th>Action</th>
         </tr>
 
         <?php foreach ($tasks as $task): ?>
@@ -20,6 +21,10 @@
             </td>
             <td>
                 <?= $task->user_id ?>
+            </td>
+            <td>
+                <?= $this->Html->link('Edit', ['action' => 'edit', $task->id]) ?> | 
+                <?= $this->Html->link('Delete', ['action' => 'delete', $task->id]) ?>
             </td>
         </tr>
         <?php endforeach; ?>
