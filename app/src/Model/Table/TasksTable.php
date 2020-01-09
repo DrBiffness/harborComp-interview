@@ -24,6 +24,8 @@ class TasksTable extends Table
             ->maxLength('description', 1000)
 
             ->allowEmptyString('status', false)
-            ->inList('status', ['Not Started', 'In Progress', 'Completed']); 
+            ->inList('status', ['Not Started', 'In Progress', 'Completed']);
+            
+        return $validator;
     }
 }
