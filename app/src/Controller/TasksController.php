@@ -7,7 +7,7 @@ class TasksController extends AppController
     public function index()
     {
         $this->loadComponent('Paginator');
-        $tasks = $this->Paginator->paginate($this->Tasks->find());
+        $tasks = $this->paginate($this->Tasks);
         $this->set(compact('tasks'));
     }
 
