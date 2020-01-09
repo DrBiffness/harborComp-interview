@@ -23,6 +23,11 @@ use Cake\Http\BaseApplication;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use Authentication\AuthenticationService;
+use Authentication\AuthenticationServiceInterface;
+use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Middleware\AuthenticationMiddleware;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
  * Application setup class.
@@ -55,6 +60,7 @@ class Application extends BaseApplication
         }
 
         // Load more plugins here
+        $this->addPlugin('Authentication');
     }
 
     /**
@@ -65,6 +71,8 @@ class Application extends BaseApplication
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
+        $authentication = new AuthenticationMiddleware($this);
+        
         $middlewareQueue
             // Catch any exceptions in the lower layers,
             // and make an error page/response
@@ -82,8 +90,8 @@ class Application extends BaseApplication
             // using it's second constructor argument:
             // `new RoutingMiddleware($this, '_cake_routes_')`
             ->add(new RoutingMiddleware($this));
-
-            ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
+            ->add($authentication);
+            // ->add(new \Authentication\Middleware\AuthenticationMiddleware($this->configAuth()));
 
         return $middlewareQueue;
     }

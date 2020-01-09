@@ -73,4 +73,12 @@ class TasksController extends AppController
             return $this->redirect(['action' => 'index']);
         }  
     }
+
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // configure the login action to don't require authentication, preventing
+        // the infinite redirect loop issue
+        $this->Authentication->addUnauthenticatedActions(['index']);
+    }
 }
