@@ -22,7 +22,7 @@ class TasksController extends AppController
             return [
                 'value' => $value->id,
                 'text' => $value->username
-            ]
+            ];
         });
 
         if ($this->request->is(['post', 'put'])) {
