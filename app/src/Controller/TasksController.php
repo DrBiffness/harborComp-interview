@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-$status = ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'];
 
 class TasksController extends AppController
 {
@@ -29,8 +28,7 @@ class TasksController extends AppController
             $this->Flash->error(__('Unable to add your task.'));
         }
         $this->set('task', $task);
-        global $status;
-        $this->set('status', $status);
+        $this->set('status', ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed']);
     }
 
     public function edit($id)
@@ -62,8 +60,7 @@ class TasksController extends AppController
         //     $usersArr[$user->id] = $user->username; 
         // }
         // $this->set('users', $usersArr);
-        global $status;
-        $this->set('status', $status);
+        $this->set('status', ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed']);
     }
 
     public function delete($id)

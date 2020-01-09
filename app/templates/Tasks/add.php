@@ -6,7 +6,6 @@
     echo $this->Form->control('task_name');
     echo $this->Form->control('description', ['rows' => '5']);
     echo $this->Form->control('status', ['options' => $status]);
-    echo $status;
     echo $this->Form->button(__('Save Task'));
     echo $this->Form->end();
 ?>
