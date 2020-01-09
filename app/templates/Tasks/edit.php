@@ -4,7 +4,7 @@
     echo $this->Form->control('task_name');
     echo $this->Form->control('description', ['rows' => '5']);
     echo $this->Form->control('status', ['options' => ['Not Started', 'In Progress', 'Completed']]);
-    echo $this->Form->control('users', ['options' => $users]);
+    echo $this->Form->control('username', ['options' => $users, 'values' => $values]);
     echo $this->Form->button(__('Save Task'));
     echo $this->Form->end();
 ?>

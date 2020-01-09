@@ -29,6 +29,7 @@ class TasksController extends AppController
         }
         $this->set('task', $task);
         $this->set('users', ['user1', 'user2']);
+        $this->set('values', ['value1', 'value2']);
     }
 
     public function delete()
