@@ -4,9 +4,17 @@ namespace App\Controller;
 
 class TasksController extends AppController
 {
+    
+    
     public function index()
     {
         // $this->loadComponent('Paginator');
+        $this->paginate = [
+            'limit' => 10,
+            'order' => [
+                'Tasks.task_name' => 'asc'
+            ]
+        ];
         $tasks = $this->paginate($this->Tasks);
         $this->set(compact('tasks'));
     }
