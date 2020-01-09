@@ -35,7 +35,7 @@ use Psr\Http\Message\ServerRequestInterface;
  * This defines the bootstrapping logic and middleware layers you
  * want to use in your application.
  */
-class Application extends BaseApplication
+class Application extends BaseApplication implements AuthenticationServiceProviderInterface
 {
     /**
      * Load all the application configuration and bootstrap logic.
@@ -61,6 +61,38 @@ class Application extends BaseApplication
 
         // Load more plugins here
         $this->addPlugin('Authentication');
+    }
+
+    /**
+     * Returns a service provider instance.
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request Request
+     * @return \Authentication\AuthenticationServiceInterface
+     */
+    public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
+    {
+        $service = new AuthenticationService();
+        $service->setConfig([
+            'unauthenticatedRedirect' => '/users/login',
+            'queryParam' => 'redirect',
+        ]);
+
+        $fields = [
+            'username' => 'username',
+            'password' => 'password'
+        ];
+
+        // Load the authenticators, you want session first
+        $service->loadAuthenticator('Authentication.Session');
+        $service->loadAuthenticator('Authentication.Form', [
+            'fields' => $fields,
+            'loginUrl' => '/users/login'
+        ]);
+
+        // Load identifiers
+        $service->loadIdentifier('Authentication.Password', compact('fields'));
+
+        return $service;
     }
 
     /**
@@ -96,34 +128,34 @@ class Application extends BaseApplication
         return $middlewareQueue;
     }
 
-    protected function configAuth(): \Authentication\AuthenticationService
-    {
-        $authenticationService = new \Authentication\AuthenticationService([
-            'unauthenticatedRedirect' => '/users/login',
-            'queryParam' => 'redirect',
-        ]);
+    // protected function configAuth(): \Authentication\AuthenticationService
+    // {
+    //     $authenticationService = new \Authentication\AuthenticationService([
+    //         'unauthenticatedRedirect' => '/users/login',
+    //         'queryParam' => 'redirect',
+    //     ]);
 
-        // Load identifiers, ensure we check email and password fields
-        $authenticationService->loadIdentifier('Authentication.Password', [
-            'fields' => [
-                'username' => 'username',
-                'password' => 'password',
-            ]
-        ]);
+    //     // Load identifiers, ensure we check email and password fields
+    //     $authenticationService->loadIdentifier('Authentication.Password', [
+    //         'fields' => [
+    //             'username' => 'username',
+    //             'password' => 'password',
+    //         ]
+    //     ]);
 
-        // Load the authenticators, you want session first
-        $authenticationService->loadAuthenticator('Authentication.Session');
-        // Configure form data check to pick email and password
-        $authenticationService->loadAuthenticator('Authentication.Form', [
-            'fields' => [
-                'username' => 'username',
-                'password' => 'password',
-            ],
-            'loginUrl' => '/users/login',
-        ]);
+    //     // Load the authenticators, you want session first
+    //     $authenticationService->loadAuthenticator('Authentication.Session');
+    //     // Configure form data check to pick email and password
+    //     $authenticationService->loadAuthenticator('Authentication.Form', [
+    //         'fields' => [
+    //             'username' => 'username',
+    //             'password' => 'password',
+    //         ],
+    //         'loginUrl' => '/users/login',
+    //     ]);
 
-        return $authenticationService;
-    }
+    //     return $authenticationService;
+    // }
 
     /**
      * Bootrapping for CLI application.
