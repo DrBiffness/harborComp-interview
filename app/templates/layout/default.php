@@ -40,11 +40,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 <body>
     <nav class="top-nav">
         <div class="top-nav-title">
-            <a href="/"><span>Cake</span>PHP</a>
+            <a href="/"><span>Home</span></a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" href="https://api.cakephp.org/4/">API</a>
+            <?php if($this->Authentication->isValid()):
+                    $this->Html->postLink(__('Logout'), ['controller' => 'Users', 'action' => 'logout'], ['confirm' => __('Are you sure you want to logout?')]);
+            else: 
+                $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']);
+            endif;
+            ?>
         </div>
     </nav>
     <main class="main">
