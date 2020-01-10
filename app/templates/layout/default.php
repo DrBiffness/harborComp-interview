@@ -44,11 +44,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
         <div class="top-nav-links">
             <?php 
-            if($this->Identity->isLoggedIn()){
-                $this->Html->postLink(__('Logout'), ['controller' => 'Users', 'action' => 'logout'], ['confirm' => __('Are you sure you want to logout?')]);
-            } else {
+            if($this->Identity->isLoggedIn()):
+                    $this->Html->postLink(__('Logout'), ['controller' => 'Users', 'action' => 'logout'], ['confirm' => __('Are you sure you want to logout?')]);
+            else: 
                 $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']);
-            }
+            endif;
             ?>
         </div>
     </nav>
