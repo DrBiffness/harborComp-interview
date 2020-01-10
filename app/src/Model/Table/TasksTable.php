@@ -12,8 +12,7 @@ class TasksTable extends Table
         parent::initialize($config);
         $this->hasOne('Users')
             ->setProperty('username')
-            ->setForeignKey('user_id')
-            ->joinType('INNER');
+            ->setForeignKey('user_id');
     }
 
     public function validationDefault(Validator $validator): Validator
