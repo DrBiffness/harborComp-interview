@@ -15,6 +15,8 @@
             </thead>
             <tbody>
                 <?php foreach ($tasks as $task): ?>
+                    
+                <?= echo $task ?>
                 <tr>
                     <td><?= h($task->task_name) ?></td>
                     <td><?= h($task->description) ?></td>
