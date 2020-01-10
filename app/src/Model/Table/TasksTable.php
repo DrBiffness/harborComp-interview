@@ -10,9 +10,7 @@ class TasksTable extends Table
     public function initialize(array $config): void
     {
         parent::initialize($config);
-        $this->hasOne('Users', [
-            'className' => 'Users'
-        ]);
+        $this->belongsTo('Users');
     }
 
     public function validationDefault(Validator $validator): Validator
