@@ -44,8 +44,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
         <div class="top-nav-links">
             <?php 
-                $authenticated = $this->Authentication->getResult();
-            if($authenticated->isValid()):
+                $result = $request->getAttribute('authentication')-getResult();
+            if($result->isValid()):
                     $this->Html->postLink(__('Logout'), ['controller' => 'Users', 'action' => 'logout'], ['confirm' => __('Are you sure you want to logout?')]);
             else: 
                 $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']);
