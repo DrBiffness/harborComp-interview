@@ -34,9 +34,9 @@ class UsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('users');
-        $this->setDisplayField('id');
-        $this->setPrimaryKey('id');
+        // $this->setTable('users');
+        // $this->setDisplayField('id');
+        // $this->setPrimaryKey('id');
 
         $this->hasMany('Tasks', [
             'foreignKey' => 'user_id',
