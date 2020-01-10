@@ -15,7 +15,7 @@ class TasksController extends AppController
                 'Tasks.task_name' => 'asc'
             ]
         ];
-        $tasks = $this->paginate($this->Tasks);
+        $tasks = $this->paginate($this->Tasks->contain(['Users']));
         $this->set(compact('tasks'));
     }
 

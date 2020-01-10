@@ -10,10 +10,8 @@ class TasksTable extends Table
     public function initialize(array $config): void
     {
         parent::initialize($config);
-
-        $this->setTable('tasks');
-        $this->setDisplayField('id');
-        $this->setPrimaryKey('id');
+        $this->hasOne('Users')
+            ->setProperty('username');
     }
 
     public function validationDefault(Validator $validator): Validator
