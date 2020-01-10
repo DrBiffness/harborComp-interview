@@ -10,9 +10,7 @@ class TasksTable extends Table
     public function initialize(array $config): void
     {
         parent::initialize($config);
-        $this->hasOne('Users')
-            ->setProperty('username')
-            ->setForeignKey('user_id');
+        $this->hasOne('Users');
     }
 
     public function validationDefault(Validator $validator): Validator
