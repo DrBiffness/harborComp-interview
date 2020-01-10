@@ -44,12 +44,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
         <div class="top-nav-links">
             <?php 
-                $result = $request->getAttribute('authentication')-getResult();
-            if($result->isValid()):
-                    $this->Html->postLink(__('Logout'), ['controller' => 'Users', 'action' => 'logout'], ['confirm' => __('Are you sure you want to logout?')]);
-            else: 
+            if($this->Session->read('Auth')){
+                $this->Html->postLink(__('Logout'), ['controller' => 'Users', 'action' => 'logout'], ['confirm' => __('Are you sure you want to logout?')]);
+            } else {
                 $this->Html->link(__('Login'), ['controller' => 'Users', 'action' => 'login']);
-            endif;
+            }
             ?>
         </div>
     </nav>
