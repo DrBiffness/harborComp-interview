@@ -1,6 +1,9 @@
     <div class="users index content">
     <?= $this->Html->link(__('New Task'), ['action' => 'add'], ['class' => 'button float-right']) ?>
     <h3><?= __('Tasks') ?></h3>
+    <?= $this->Form->create(null, ['type' => 'get', 'url' => ['controller' => 'Tasks', 'action' => 'index']]) ?>
+    <?= $this->Form->control('filter', ['options' => $status])?>
+    <?= $this->Form->button(__('Search')) ?>
     <div class="table-responsive">
         <table>
             <thead>
