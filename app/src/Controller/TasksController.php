@@ -48,7 +48,7 @@ class TasksController extends AppController
         }
         $this->set('users', $usersArr);
 
-        $this->set('status', $statuses);
+        $this->set('status', $this->statuses);
     }
 
     public function edit($id)
@@ -73,7 +73,7 @@ class TasksController extends AppController
         //     $usersArr[$user->id] = $user->username; 
         // }
         // $this->set('users', $usersArr);
-        $this->set('status', $statuses);
+        $this->set('status', $this->statuses);
     }
 
     public function delete($id)
