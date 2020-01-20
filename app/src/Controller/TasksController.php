@@ -21,12 +21,12 @@ class TasksController extends AppController
 
         $filter = $this->request->getData('filter');
 
-        if (!empty($filter)) {
+        if ($filter) {
             $tasks = $this->paginate($this->Tasks->find('all')->where(['Tasks.status =' => $filter])->contain(['Users']));
         } else {
             $tasks = $this->paginate($this->Tasks->find('all')->contain(['Users']));
         }
-        
+
         $this->set(compact('tasks'));
     }
 
