@@ -4,7 +4,8 @@ namespace App\Controller;
 
 class TasksController extends AppController
 {
-    
+
+    public $statuses = ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed'];
     
     public function index()
     {
@@ -15,6 +16,8 @@ class TasksController extends AppController
                 'Tasks.task_name' => 'asc'
             ]
         ];
+
+        // if ($this->request->getdata())
         $tasks = $this->paginate($this->Tasks->find('all')->contain(['Users']));
         $this->set(compact('tasks'));
     }
@@ -45,7 +48,7 @@ class TasksController extends AppController
         }
         $this->set('users', $usersArr);
 
-        $this->set('status', ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed']);
+        $this->set('status', $statuses);
     }
 
     public function edit($id)
@@ -70,7 +73,7 @@ class TasksController extends AppController
         //     $usersArr[$user->id] = $user->username; 
         // }
         // $this->set('users', $usersArr);
-        $this->set('status', ['Not Started' => 'Not Started', 'In Progress' => 'In Progress', 'Completed' => 'Completed']);
+        $this->set('status', $statuses);
     }
 
     public function delete($id)
